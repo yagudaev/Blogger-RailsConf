@@ -4,11 +4,19 @@
 
 import React from 'react'
 import ReactDOM from 'react-dom'
-import BlogContainer from 'BlogContainer'
+import { createStore } from 'redux'
+import { Provider } from 'react-redux'
+import rootReducer from 'reducers'
+
+import BlogContainer from 'containers/BlogContainer'
+
+const store = createStore(rootReducer)
 
 document.addEventListener('DOMContentLoaded', () => {
   ReactDOM.render(
-    <BlogContainer />,
+    <Provider store={store}>
+      <BlogContainer />
+    </Provider>,
     document.body.appendChild(document.createElement('div')),
   )
 })
