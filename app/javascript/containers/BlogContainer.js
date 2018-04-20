@@ -40,7 +40,7 @@ class BlogContainer extends Component {
 
 BlogContainer.propTypes = {
   dispatch: PropTypes.func.isRequired,
-  posts: PropTypes.arrayOf(PropTypes.objects)
+  posts: PropTypes.arrayOf(PropTypes.object)
 }
 
 const mapStateToProps = (state, ownProps) => ({

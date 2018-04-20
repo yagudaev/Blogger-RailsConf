@@ -20,6 +20,6 @@ export const fetchPosts = () => (dispatch) => {
   }).then(response => {
     return response.json()
   }).then(response => {
-    dispatch({ type: 'FETCH_POSTS_SUCCESS', records: response.data.posts })
+    dispatch({ type: FETCH_POSTS_SUCCESS, records: response.data.posts })
   })
 }
