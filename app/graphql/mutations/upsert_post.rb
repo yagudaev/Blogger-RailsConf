@@ -1,9 +1,9 @@
 Mutations::UpsertPost = GraphQL::Relay::Mutation.define do
   name "UpsertPost"
-  # TODO: define return fields
+
   return_field :post, Types::PostType
 
-  # TODO: define arguments
+  # arguments
   input_field :title, !types.String
   input_field :content, !types.String
   input_field :id, types.ID
