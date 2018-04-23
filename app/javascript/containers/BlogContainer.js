@@ -5,7 +5,8 @@ import { connect } from 'react-redux'
 import Form from './Form'
 import PostRow from './PostRow'
 
-import { fetchPosts } from '../actions/posts'
+import { fetchPosts, createPost } from '../actions/posts'
+import { getPosts } from '../selectors/posts'
 
 class BlogContainer extends Component {
   componentDidMount() {
@@ -17,18 +18,23 @@ class BlogContainer extends Component {
     dispatch(fetchPosts())
   }
 
+  handlePostSubmit = (post) => {
+    const { dispatch } = this.props
+    dispatch(createPost(post))
+  }
+
   render () {
     return (
       <div>
         <h1>Blogger</h1>
         <br/>
 
-        <Form getAllPosts={this.getAllPosts} />
+        <Form onSubmit={this.handlePostSubmit} getAllPosts={this.getAllPosts} />
         <br/>
 
         {this.props.posts.map((post, index) => (
           <PostRow
-            post={post}
+            post={console.log('my post', post) || post}
             key={index}
             getAllPosts={this.getAllPosts}
           />
@@ -44,7 +50,7 @@ BlogContainer.propTypes = {
 }
 
 const mapStateToProps = (state, ownProps) => ({
-  posts: state.posts || []
+  posts: getPosts(state) || []
 })
 
 export default connect(mapStateToProps)(BlogContainer)

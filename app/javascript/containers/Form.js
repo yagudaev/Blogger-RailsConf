@@ -20,33 +20,16 @@ export default class Form extends Component {
   handleSubmit = (event) => {
     event.preventDefault()
 
-    fetch('/graphql', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json'},
-      body: JSON.stringify({
-        query: `
-          mutation {
-            upsertPost(input: {
-              title: "${this.state.title}"
-              content: "${this.state.content}"
-              id: "${this.state.id}"
-            }) {
-              clientMutationId
-            }
-          }
-        `
-      })
-    }).then(response => {
-      // get the response back and return it as json
-      console.log(response)
-      return response.json()
-    }).then(response => {
-      // set the response somewhere accessibile to the component
-      console.log(response.data)
-      this.setState({title: '', content: ''})
-      this.props.getAllPosts()
-      if (this.props.toggleEditMode) this.props.toggleEditMode()
-    })
+    const post = {
+      id: this.state.id,
+      title: this.state.title,
+      content: this.state.content
+    }
+    console.log('log post', post)
+    this.props.onSubmit(post)
+    // immidately update, don't wait for server response, assume success
+    this.setState({ title: '', content: '' })
+    if (this.props.toggleEditMode) this.props.toggleEditMode()
   }
 
   render () {

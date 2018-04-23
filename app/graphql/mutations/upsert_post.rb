@@ -10,7 +10,7 @@ Mutations::UpsertPost = GraphQL::Relay::Mutation.define do
 
   resolve ->(obj, args, ctx) {
     post = Post.find_or_create_by(id: args[:id])
-    post = post.update(title: args[:title], content: args[:content])
+    post.update(title: args[:title], content: args[:content])
     { post: post }
   }
 end
